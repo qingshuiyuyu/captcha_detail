@@ -25,9 +25,9 @@ def get_baidu_api(image,word):
 
     img = base64.b64decode(image)
 
-    with open("test.jpg","wb") as f:
+    with open("test1.jpg","wb") as f:
         f.write(img)
-    image = get_file_content("./test.jpg")
+    image = get_file_content("./test1.jpg")
 
     options = {}
     options["recognize_granularity"] = "small"
@@ -35,10 +35,9 @@ def get_baidu_api(image,word):
     options["vertexes_location"] = "true"
     options["probability"] = "true"
     """ 带参数调用通用文字识别（含位置高精度版） """
-    # response = client.accurate(image, options)
-    response = client.general(image, options)
+    response = client.accurate(image, options)
+    # response = client.general(image, options)
     print("要匹配的值为:"+word)
-    print(response)
     try:
         result = jsonpath.jsonpath(response, "$..chars")
         for each in result:

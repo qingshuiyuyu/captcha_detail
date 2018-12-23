@@ -62,8 +62,8 @@ class QichachaLogin():
                     continue
                 x = location[0]
                 y = location[1]
-                print(x, y)
-
+                print("获取到的值为x:{},y:{}".format(x,y))
+                time.sleep(2)
                 for i in range(50):
                     el = driver.find_element_by_xpath("//div[@class='clickCaptcha_img']/img")
                     # 左上角为0，0，向右向下移动为正数字，向左向上移动为负数值
@@ -73,11 +73,10 @@ class QichachaLogin():
                                                                      xoffset=x_move,
                                                                      yoffset=y_move).perform()
                     time.sleep(0.1 / random.choice(list(range(1, 10))))
-
-                el = driver.find_element_by_xpath("//div[@class='clickCaptcha_img']/img")
+                el = driver.find_element_by_xpath("//div[@class='clickCaptcha_img']")
                 # 左上角为0，0，向右向下移动为正数字，向左向上移动为负数值
-                ActionChains(driver).move_to_element_with_offset(to_element=el, xoffset=x+8,
-                                                                 yoffset=y+10).click().perform()
+                ActionChains(driver).move_to_element_with_offset(to_element=el, xoffset=(x+8)*1.1+10,
+                                                                 yoffset=(y+8)*1.1+10).click().perform()
                 time.sleep(5)
                 if "验证码点击错误，请重试" in driver.page_source:
                     driver.find_element_by_xpath("//div[@class='clickCaptcha_text']/i").click()
@@ -96,6 +95,7 @@ class QichachaLogin():
 
 if __name__ == '__main__':
 
-    for i in range(10):
+
+    # for i in range(10):
         qichacha = QichachaLogin()
         qichacha.get_captcha()
