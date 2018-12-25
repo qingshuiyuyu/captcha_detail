@@ -51,6 +51,15 @@ def get_baidu_api(image,word):
     except Exception as e:
         print(e)
 
-if __name__ == '__main__':
+def get_word():
 
-    pass
+    options = {}
+
+    options["detect_direction"] = "true"
+    image = get_file_content("./4SUC6G.jpg")
+    response = client.basicAccurate(image, options)
+    print(response)
+
+
+if __name__ == '__main__':
+    get_word()
